@@ -1,0 +1,21 @@
+name: CI Workflow Checks
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository Code
+      uses: actions/checkout@v3
+
+    - name: Test - Check if index.html exists
+      run: |
+        if [ -f index.html ]; then
+          echo "Success: index.html exists in root directory."
+        else
+          echo "Error: index.html not found!" && exit 1
+        fi
